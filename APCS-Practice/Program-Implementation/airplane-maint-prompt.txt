@@ -1,0 +1,178 @@
+Airplane Maintenance
+Free Response
+PROMPT
+A Flight is defined as an individual trip that an airplane takes on a specific date.  If an airplane flies to the same destination at the same time on two consecutive days, then that would be considered two Flights.
+A partial declaration of the Flight class is shown below.  The hasMechanicalIssue method returns true if the airplane had a mechanical issue during the flight.
+public class Flight
+{
+    // Instance variables, constructors and other methods not shown
+
+    /**
+     * returns true if the airplane had a mechanical issue during the flight
+     * returns false otherwise
+     */
+    public boolean hasMechanicalIssue()
+    {
+        // Implementation not shown
+    }
+}
+An Airplane is defined as a physical aircraft.  The carrier is the owner of the Airplane.  The lastMonthMaintained and lastYearMaintained are the last month and year that maintenance was performed on the airplane.
+A partial declaration of the Airplane class is shown below.  The maintenanceNeeded method will be defined in part A) below.
+public class Airplane
+{
+    private String carrier;           // airline that owns airplane
+    private int lastMonthMaintained;   // 1 = Jan, 2 = Feb, ..., 12 = Dec
+    private int lastYearMaintained;    // 4-digit year
+    private ArrayList<Flight> flights; // list of flights in ascending date order
+                                       // (most recent flight is at the end of list)
+
+    // Constructors and some other methods not shown
+
+    /**
+     * returns last month that the airplane was maintained
+     * (1 = Jan, 2 = Feb, ..., 12 = Dec)
+     */
+    public int getMonthMaintained()
+    {
+        return lastMonthMaintained;
+    }
+
+    /**
+     * returns last year that the airplane was maintained
+     */
+    public int getYearMaintained()
+    {
+        return lastYearMaintained;
+    }
+
+    /**
+     * returns carrier (airline) that owns the airplane
+     */
+    public String getCarrier()
+    {
+        return carrier;
+    }
+
+    /**
+     * return true if the airplane has not been maintained yet this year
+     * OR if there were any problems reported during its last three flights.
+     * @param currMonth is current month (1 = Jan, 2 = Feb, ..., 12 = Dec)
+     * @param currYear is current year (4-digit format)
+     * @return true if the airplane needs maintenance, false otherwise
+     */
+    public boolean maintenanceNeeded(int currMonth, int currYear)
+    {
+        // To be implemented in PART A) below
+    }
+}
+An Airport is defined as a physical location that houses airplanes.  An Airport can host multiple carriers.  Each carrier can own multiple airplanes at this location.
+A partial declaration of the Airport class is shown below.  The carrierMaintenance method will be defined in part B) below.
+public class Airport
+{
+    private Airplane[] airplanes; // array of all airplanes at the airport
+
+    // Other instance variables, any constructors and some methods not shown
+
+    /**
+     * return a list of airplanes that need maintenance and belong to the
+     * specified carrier
+     * @param carrier is the carrier (airline) that owns the airplane
+     * @param currMonth is current month (1 = Jan, 2 = Feb, ..., 12 = Dec)
+     * @param currYear is current year (4-digit format)
+     */
+    public List<Airplane> carrierMaintenance(String carrier, int currMonth, int currYear)
+    {
+        // To be implemented in PART B) below
+    }
+}
+PART A)
+Define a maintenanceNeeded method in the Airplane class to determine if maintenance is needed on the aircraft. Maintenance is needed if either the airplane has not been maintained this year OR if there were any mechanical issues reported during any of the last three flights that the Airplane took. This method will be provided with parameters for the current month and the current year.  This method should return true if the Airplane needs maintenance or false if it does not need maintenance.  You can use any other methods from the Flight, Airplane or Airport classes while coding this method.
+/**
+ * return true if the airplane has not been maintained yet this year
+ * OR if there were any problems reported during its last three flights.
+ * @param currMonth is current month (1 = Jan, 2 = Feb, ..., 12 = Dec)
+ * @param currYear is current year (4-digit format)
+ * @return true if the airplane needs maintenance, false otherwise
+ */
+public boolean maintenanceNeeded(int currMonth, int currYear)
+{
+
+
+}
+PART B)
+Define a carrierMaintenance method in the Airport class to determine which Airplanes owned by a specified carrier need maintenance.  This method will be provided with the carrier name, current month, and current year as its parameters.  This method should return a list of the Airplanes owned by the carrier that need maintenance.  You can use any other methods from the Flight, Airplane or Airport classes while coding this method.
+/**
+ * return a list of airplanes that need maintenance and belong to the
+ * specified carrier
+ * @param carrier is the carrier (airline) that owns the airplane
+ * @param currMonth is current month (1 = Jan, 2 = Feb, ..., 12 = Dec)
+ * @param currYear is current year (4-digit format)
+ */
+public List<Airplane> carrierMaintenance(String carrier, int currMonth, int currYear)
+{
+
+
+}
+SAMPLE RESPONSE
+PART A)
+public boolean maintenanceNeeded(int currMonth, int currYear)
+{
+    if (currYear > lastYearMaintained)
+        return true;
+
+    for (int i = flights.size()-1; i >=0 && i>=flights.size()-3; i--)
+    {
+        if (flights.get(i).hasMechanicalIssue())
+            return true;
+    }
+    return false;
+}
+PART B)
+public List<Airplane> carrierMaintenance(String carrier, int currMonth, int currYear)
+{
+    List<Airplane> ourAirplanes = new ArrayList<Airplane>();
+
+    for (int i=0; i<airplanes.length; i++)
+    {
+        if (airplanes[i].getCarrier().equals(carrier) && airplanes[i].maintenanceNeeded(currMonth, currYear))
+        {
+            ourAirplanes.add(airplanes[i]);
+        }
+    }
+    return ourAirplanes;
+}
+OR USING AN ENHANCED FOR LOOP:
+public List<Airplane> carrierMaintenance(String carrier, int currMonth, int currYear)
+{
+    List<Airplane> ourAirplanes = new ArrayList<Airplane>();
+
+    for (Airplane a : airplanes)
+    {
+        if (a.getCarrier().equals(carrier) && a.maintenanceNeeded(currMonth))
+        {
+            ourAirplanes.add(a);
+        }
+    }
+    return ourAirplanes;
+}
+RUBRIC & EXPLANATION
+This question counts as a total of 9 points.
+Part A) maintenanceNeeded method (4 points)
+Boolean method to determine if maintenance is needed to the airplane.
+Points	Content
++1	Compare currYear to lastYearMaintained and return true if currYear is not equal to lastYearMaintained. Alternative: compare currMonth to lastMonthMaintained and currYear to lastYearMaintained correctly.
++1	Access the last three elements in the flights array.
++1	Call the hasMechanicalIssue method on at least one Flight object and return true if hasMechanicalIssue returns true.
++1	Return false if the Airplane had no mechanical issues during its last three flights and the airplane was maintained this year.
+
+
+Part B)  carrierMaintenance  (5 points)
+Returns a list of airplanes that belong to a specific carrier and need maintenance performed on them.
+Points	Content
++1	Create an empty ArrayList of Airplane objects AND return the populated ArrayList at the bottom of the method
++1	Loop through ALL elements in the airplanes array with no out of bounds issues
++1	Correctly compare the carrier parameter to the carrier of the Airplane element (must call getCarrier method from the Airplane class)
++1	Call the maintenanceNeeded method on the Airplane element (must correctly pass the currMonth and currYear as parameters to this method)
++1	Add the Airplane element to the new ArrayList if the carrier matches and maintenance is needed on the Airplane
+TAGS
+arraysclassesjava-library-classeslistsoperations-and-algorithmsprogram-implementationprogramming-constructionssearchingstandard-data-structures
