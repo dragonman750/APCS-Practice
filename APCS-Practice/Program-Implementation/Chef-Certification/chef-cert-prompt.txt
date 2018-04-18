@@ -1,0 +1,209 @@
+Chef Certification
+Free Response
+PROMPT
+A chef can obtain a certification level depending on how many times they have prepared a certain food or a combination of foods.  Three different classes are used here: Food, Meal, and Chef.
+A Food is defined by a food type and the description of the food itself. A food type is the category of food, such as meat, vegetable, appetizer, dessert, etc.  The food description is more specific, such as steak, lamb, corn, pumpkin pie, etc.  A partial definition of the Food class is shown below.
+public class Food
+{
+    /**
+     * Constructor method for a food
+     * @param foodType is the category of food
+     * @param foodDesc is the description of the food
+     */
+    public Food(String foodType, String foodDesc)
+    {
+        // implementation not shown
+    }
+
+    /**
+     * returns the category of the food
+     */
+    public String getFoodType()
+    {
+        // implementation not shown
+    }
+
+    /**
+     * returns the description of the food
+     */
+    public String getFoodDesc()
+    {
+        // implementation not shown
+    }
+
+    // instance variables and other methods not shown
+}
+A Meal is defined by the name of the meal and a list of Food prepared for the meal.  A partial definition of the Meal class is shown below.
+public class Meal
+{
+    /**
+     * Constructor method for a meal
+     * @param mealDesc is the text description of the meal
+     * @param foods is an array of food that make up the meal
+     */
+    public Meal(String mealDesc, Food[] foods)
+    {
+        // implementation not shown
+    }
+
+    /**
+     * returns the description of the meal
+     */
+    public String getMealDesc()
+    {
+        // implementation not shown
+    }
+
+    /**
+     * returns an array of food prepared for the meal
+     * @return
+     */
+    public Food[] getFoods()
+    {
+        // implementation not shown
+    }
+
+    // instance variables and other methods not shown
+}
+A Chef is defined by the name of the chef, the chef’s number of years of experience, and a list of all the meals the chef has ever prepared.  Every time that a chef has prepared a meal, it is added to the list.  Therefore, if the chef prepared the same meal last week three times and prepared it today two times, then the meals array list would contain the meal at least five times.  A partial definition of the Chef class is shown below.
+public class Chef
+{
+    private String name;      // name of the chef
+    private List<Meal> meals; // list of all meals prepared by the chef.  If the chef has
+                              // prepared the meal 20 times, the Meal will
+                              // exist 20 times in this list
+    private int yearsExperience;    // number of years of experience
+
+    /**
+     * Constructor method for a Chef
+     * @param name is the name of the chef
+     * @param meals is a list of all meals prepared by the chef
+     * @param yrs is the number of years of experience for the chef
+     */    public Chef(String name, List<Meal> meals, int yrs)
+    {
+        // implementation not shown
+    }
+
+    /**
+     * This method returns the certification level (either A, B, or C)
+     * that the chef has obtained for preparing this type of food.
+     * If the chef has prepared this food at least 100 times, then they
+     * would receive a certification level of "A".  If they have prepared
+     * the food from 50-99 times, they would receive a certification level
+     * of "B".  Otherwise they would receive a certification level of "C".
+     * @param foodType is the category of the food
+     * @param foodDesc is the description of the food
+     */
+    public String foodCertification(String foodType, String foodDesc)
+    {
+        // to be implemented in PART A) below
+    }
+
+    /**
+     * This method returns true if the chef is considered a master chef
+     * for a certain meal combination.  Otherwise it returns false. A chef
+     * is considered a master chef for a meal only if they have an "A"
+     * certification for every food in the meal.
+     * @param mealCombo is a Meal (combination of foods)
+     */
+    public boolean mealMasterChef(Meal mealCombo)
+    {
+        // to be implemented in PART B) below
+    }
+
+    // other methods not shown
+}
+PART A)
+The foodCertification method in the Chef class accepts two parameters: the type (category) of food, and the more specific description of the food.  This method needs to determine and return the certification level the chef has earned for preparing this food.  The certification level is based solely on how many times the chef has prepared the food.  If the chef has prepared this food at least 100 times in any of the meals the chef has made, then the chef earns an “A” certification level.  Otherwise, if the chef has prepared the food at least 50 times then he/she earns a “B” certification level. Otherwise, he/she earns a “C” certification level.  You can use any other methods from the Food, Meal, or Chef classes while coding this method.
+As an example:
+If Chef Sarah has prepared a meal of chicken and green beans 70 times, a meal of lamb and carrots 150 times, and a meal of steak and green beans 40 times, then
+calling foodCertification("meat", "chicken") will return "B"
+calling foodCertification("vegetable", "carrots") will return "A"
+calling foodCertification("vegetable", "green beans") will return "A" (since 70 + 40 = 110)
+calling foodCertification("meat", "steak") will return "C"
+Complete the foodCertification method below:
+/**
+ * This method returns the certification level (either A, B, or C)
+ * that the chef has obtained for preparing this type of food.
+ * If the chef has prepared this food at least 100 times, then they
+ * would receive a certification level of "A".  If they have prepared
+ * the food from 50-99 times, they would receive a certification level
+ * of "B".  Otherwise they would receive a certification level of "C".
+ * @param foodType is the category of the food
+ * @param foodDesc is the description of the food
+*/
+public String foodCertification(String foodType, String foodDesc)
+{
+
+
+}
+PART B)
+The mealMasterChef method in the Chef class accepts a Meal as its only parameter and determines if the chef is a master chef for a given combination of foods.  This method will return true only if the chef has earned an "A" certification level for every food in the Meal parameter.  Otherwise it will return false.  You can use any other methods from the Food, Meal, or Chef classes while coding this method.
+As an example:
+If Chef Sarah has prepared a meal of chicken and green beans 70 times, a meal of lamb and carrots 150 times, and a meal of steak and green beans 40 times, then
+if mealA is the "Chef’s Special" composed of chicken and green beans calling sarah.mealMasterChef(mealA) will return false (since Sarah has a "B" certification level for chicken and an "A" certification level for green beans)
+if mealB is the "Lamb Delite" composed of lamb and green beans calling sarah.mealMasterChef(mealB) will return true (since Sarah has an "A" certification level for both lamb and green beans)
+Complete the mealMasterChef method below:
+/**
+ * This method returns true if the chef is considered a master chef
+ * for a certain meal combination.  Otherwise it returns false. A chef
+ * is considered a master chef for a meal only if they have an "A"
+ * certification for every food in the meal.
+ * @param mealCombo is a Meal or combination of foods
+ */
+public boolean mealMasterChef(Meal mealCombo)
+{
+
+
+}
+SAMPLE RESPONSE
+Typical Solutions:
+PART A)
+public String foodCertification(String foodType, String foodDesc)
+{
+    int count = 0;
+
+    for (Meal m : meals)
+    {
+        for (Food f: m.getFoods())
+        {
+            if (f.getFoodType().equals(foodType) && f.getFoodDesc().equals(foodDesc))
+                count++;
+        }
+    }
+    if (count >= 100)
+        return "A";
+    else
+    if (count >= 50)
+        return "B";
+    return "C";
+}
+PART B)
+public boolean mealMasterChef(Meal mealCombo)
+{
+    for (Food f : mealCombo.getFoods())
+    {
+        if (!foodCertification(f.getFoodType(), f.getFoodDesc()).equals("A"))
+            return false;
+    }
+    return true;
+}
+RUBRIC & EXPLANATION
+This question counts as a total of 9 points.
+Part A)  foodCertification method (5 points)
+Returns the certification level the chef has earned for preparing a specific food.
+Points	Content
++1	Loop through all the Meal elements in the meals array list with no bounds errors.
++1	Within this outside loop, call getFoods on the Meal element to get access to the Food array for the Meal.
++1	Create a nested loop to access all Food elements in this Food array with no bounds errors.
++1	If the food type and food description of the Food object match the two parameters, add 1 to a counter variable.  Must call the methods getFoodType() and getFoodDesc(). Note: It is ok if only the food description is checked.
++1	After the loop, check if the counter >= 100 then return "A". Else if counter >= 50 then return "B", else return "C".
+
+
+Part B)  mealMasterChef method (4 points)
+Determines if the chef is a master chef for a given combination of foods.
+Points	Content
++1	Call getFoods() on the mealCombo parameter to get access to the array of Food for the mealCombo.
++1	Loop through all the elements in this array of Food with no bounds errors.
++1	 Within the loop, check to see if the certification level for each element is "A".  Must call the foodCertification method with proper parameters on each element.
++1	If the certification level is not an "A" for any food in the array, then return false.  Else return true after the loop.
