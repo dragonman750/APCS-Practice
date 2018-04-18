@@ -156,38 +156,7 @@ public boolean mealMasterChef(Meal mealCombo)
 
 
 }
-SAMPLE RESPONSE
-Typical Solutions:
-PART A)
-public String foodCertification(String foodType, String foodDesc)
-{
-    int count = 0;
 
-    for (Meal m : meals)
-    {
-        for (Food f: m.getFoods())
-        {
-            if (f.getFoodType().equals(foodType) && f.getFoodDesc().equals(foodDesc))
-                count++;
-        }
-    }
-    if (count >= 100)
-        return "A";
-    else
-    if (count >= 50)
-        return "B";
-    return "C";
-}
-PART B)
-public boolean mealMasterChef(Meal mealCombo)
-{
-    for (Food f : mealCombo.getFoods())
-    {
-        if (!foodCertification(f.getFoodType(), f.getFoodDesc()).equals("A"))
-            return false;
-    }
-    return true;
-}
 RUBRIC & EXPLANATION
 This question counts as a total of 9 points.
 Part A)  foodCertification method (5 points)
